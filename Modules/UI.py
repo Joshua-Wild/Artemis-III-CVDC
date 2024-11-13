@@ -2,8 +2,6 @@ import cv2
 import numpy as np
 import threading
 
-
-
 class Overlay:
     def __init__(self):
         pass
@@ -29,11 +27,11 @@ class Overlay:
                 cv2.rectangle(image, (brect[0], brect[1]), (brect[2], brect[3]), (255, 0, 0), 1)
 
 
-    #def draw_info(image):
-        # Using cv2.putText()
-        
-            #cv2.putText(image, "MODE", (300, 10),cv2.FONT_HERSHEY_COMPLEX_SMALL, fontScale = 1.0, color = (255, 255, 255), thickness = 1)
-            #cv2.rectangle()
+    def draw_info(image):
+            
+            cv2.rectangle(image, (300, 10), (300+5, 10 -4), (0,0,0), 1 )
+            cv2.putText(image, "MODE", (300, 10),cv2.FONT_HERSHEY_COMPLEX_SMALL, fontScale = 1.0, color = (255, 255, 255), thickness = 1)
+            
 
 
 # Threaded Video Capture class to ensure non-blocking camera input

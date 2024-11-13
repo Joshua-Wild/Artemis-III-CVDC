@@ -1,0 +1,1 @@
+processing_interval = 0.1  # Process gestures every 100ms

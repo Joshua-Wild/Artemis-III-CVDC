@@ -37,6 +37,10 @@ class Point_Processing:
     
     def logging_csv(self,number, landmark_list):
 
+        with open('Model/keypoint_classifier_label.csv', encoding='utf-8-sig') as f:
+            keypoint_classifier_labels = csv.reader(f)
+            keypoint_classifier_labels = [ row[0] for row in keypoint_classifier_labels ]
+
         if  (0 <= number <= 9):
             csv_path = 'Model/keypoint.csv'
             with open(csv_path, 'a', newline="") as f:

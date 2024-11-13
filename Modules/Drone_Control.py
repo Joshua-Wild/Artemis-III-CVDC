@@ -2,7 +2,7 @@
 from pyparrot.Bebop import Bebop
 import time
 
-class Drone_module:
+class DroneController:
     def __init__(self):
          # Cooldown Period between inputs
         self.takeoff_cooldown = 1.0  # Reduced to 1 second for faster response
@@ -10,21 +10,21 @@ class Drone_module:
         self.is_flying = False  # Track if the drone is currently flying
         self.current_altitude = 0  # Track current altitude
         self.landing_start_time = 0 #Track the time when landing is initiated 
-
-         # Initialize drone connection and state
         self.bebop = Bebop()
+
+    def initialize(self):
+        # Initialize drone connection and state
         print("Connecting")
 
         if self.bebop.connect(10):
-            print("Success")
+            print("Successfuly connected")
+            self.bebop.smart_sleep(5)
+            self.bebop.ask_for_state_update()
+            return True
         else: 
-            print ("Failure")
+            print ("Failed to connect")
+            return False
 
-        print("Sleeping")
-        self.bebop.smart_sleep(5)
-        self.bebop.ask_for_state_update()
-        
-        pass
 
     def control_drone_with_gesture(self, hand_sign_id):
         landing_range = 25
@@ -82,4 +82,9 @@ class Drone_module:
                     self.bebop.fly_direct(roll = 0, pitch= -50, yaw=0, vertical_movement=0, duration=1) #Backwards
                     '''
                 print ("Ok - Going Backwards")
+
+        def disconnect():
+            print('disconnecting')
+            self.bebop.disconnect()
+            
     
